@@ -11,10 +11,12 @@ docker run --name new-mysql -e MYSQL_ROOT_PASSWORD=your_password -p 3306:3306 -d
 
 -> Create a new database
 
-1. start mysql server
+start mysql server
+
 docker exec -it new-mysql mysql -u root -p
 
-2. Run the following command in SQL server
+Run the following command in SQL server
+
 CREATE DATABASE newdb;
 
 -> Clone the Repo
@@ -28,6 +30,7 @@ DB_URL= yourDBURL
 -> Run migrations to initilaize tables
 
 cd migrations
+
 goose mysql $(yourDBURL) up
 
 -> Initialize go dependencies
