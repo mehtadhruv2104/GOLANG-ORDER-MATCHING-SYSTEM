@@ -68,7 +68,7 @@ func (store *OrderStoreManager) AddOrder(order *models.Order) (int64,error) {
 
 func (store *OrderStoreManager) GetOrderByID(id int64) (*models.Order, error) {
 	query := `
-		SELECT id, symbol, side, type, price, quantity, remaining_qty, status, created_at, updated_at
+		SELECT id, symbol, side, type, price, quantity, remaining_quantity, status, created_at, updated_at
 		FROM orders 
 		WHERE id = ?
 	`
@@ -99,7 +99,7 @@ func (store *OrderStoreManager) GetOrderByID(id int64) (*models.Order, error) {
 
 func (store *OrderStoreManager) GetOrdersBySymbol(symbol string) ([]models.Order, error) {
 	query := `
-		SELECT id, symbol, side, type, price, quantity, remaining_qty, status, created_at, updated_at
+		SELECT id, symbol, side, type, price, quantity, remaining_quantity, status, created_at, updated_at
 		FROM orders 
 		WHERE symbol = ?
 		ORDER BY created_at ASC
@@ -109,7 +109,7 @@ func (store *OrderStoreManager) GetOrdersBySymbol(symbol string) ([]models.Order
 
 func (store *OrderStoreManager) GetOrdersByStatus(symbol string, status string) ([]models.Order, error) {
 	query := `
-		SELECT id, symbol, side, type, price, quantity, remaining_qty, status, created_at, updated_at
+		SELECT id, symbol, side, type, price, quantity, remaining_quantity, status, created_at, updated_at
 		FROM orders 
 		WHERE symbol = ? AND status = ?
 		ORDER BY created_at ASC

@@ -142,5 +142,28 @@ func (s *Service) PrintCurrentHeapState(symbol string){
 	fmt.Println("Sell Heap Top", orderBook.SellOrders.GetTopOrder())
 }
 
+func (s *Service) GetOrderByID(orderID int64)(*models.Order, error){
+	var orderDemo models.Order
+	if orderID == 0{
+		return &orderDemo,errors.New("invalid Order Id")
+	}
+	order,err :=s.OrderStore.GetOrderByID(orderID)
+	if err != nil{
+		return order,errors.New(err.Error())
+	}
+	return order,nil
+}
+
+func (s *Service) CancelOrder(orderID int64)(error){
+	if orderID == 0{
+		return errors.New("invalid Order Id")
+	}
+	err :=s.OrderStore.CancelOrder(orderID)
+	if err != nil{
+		return errors.New("order Referencing this orderId not found")
+	}
+	return nil
+}
+
 
 

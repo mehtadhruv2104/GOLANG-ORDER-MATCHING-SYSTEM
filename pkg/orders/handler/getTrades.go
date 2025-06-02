@@ -7,8 +7,7 @@ import (
 )
 
 
-
-func (h OrderHandler) GetOrderBook(c *gin.Context) {
+func (h OrderHandler) GetTrades(c *gin.Context) {
 	symbol := c.Query("symbol")
 	if strings.TrimSpace(symbol) == "" {
 		c.JSON(400, gin.H{
@@ -16,14 +15,12 @@ func (h OrderHandler) GetOrderBook(c *gin.Context) {
 		})
 		return
 	}
-	orderBookResponse,err := h.OrderService.OrderBookManager.GetOrderBook(symbol)
-	if err!=nil{
+	trades,err := h.OrderService.TradeStore.GetTradesBySymbol(symbol)
+	if err != nil{
 		c.JSON(500, gin.H{
-			"error": err,
+			"error":"Could not find trades",
 		})
-		return
 	}
-	
-	c.JSON(200,orderBookResponse)
+	c.JSON(200,trades)
 
 }

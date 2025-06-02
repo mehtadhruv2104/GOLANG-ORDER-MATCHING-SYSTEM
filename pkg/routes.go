@@ -3,7 +3,6 @@ package pkg
 import (
 	"github.com/gin-gonic/gin"
 	orderHandler "github.com/mehtadhruv2104/GOLANG-ORDER-MATCHING-SYSTEM/pkg/orders/handler"
-	tradeHandler "github.com/mehtadhruv2104/GOLANG-ORDER-MATCHING-SYSTEM/pkg/trades/handler"
 )
 
 
@@ -12,8 +11,8 @@ import (
 func InitTradeEngineRoutes(apiRoutes *gin.RouterGroup, h *orderHandler.OrderHandler) {
 
 	apiRoutes.POST("/orders", h.PlaceOrder)
-	apiRoutes.DELETE("/orders/:id", orderHandler.CancelOrder)
-	apiRoutes.GET("/orders/:id", orderHandler.GetOrderStatus)
-	apiRoutes.GET(("/orderbook"), orderHandler.GetOrderBook)
-	apiRoutes.GET("/trades", tradeHandler.GetTrades)
+	apiRoutes.DELETE("/orders/:id", h.CancelOrder)
+	apiRoutes.GET("/orders/:id", h.GetOrderStatus)
+	apiRoutes.GET(("/orderbook"), h.GetOrderBook)
+	apiRoutes.GET("/trades", h.GetTrades)
 }

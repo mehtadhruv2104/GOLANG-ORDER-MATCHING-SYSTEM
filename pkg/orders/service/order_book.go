@@ -2,6 +2,7 @@ package service
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 
 	"github.com/mehtadhruv2104/GOLANG-ORDER-MATCHING-SYSTEM/pkg/models"
@@ -16,6 +17,12 @@ type OrderBook struct {
 	Symbol	  string
 	BuyOrders  *Heap
 	SellOrders *Heap
+}
+
+type OrderBookResponse struct{
+	Symbol	  string
+	BuyOrders  []models.Order
+	SellOrders []models.Order
 }
 
 func NewOrderBookManager(db *sql.DB) *OrderBookManager {
@@ -37,6 +44,32 @@ func (bookManager *OrderBookManager) GetOrCreateOrderBook(symbol string) *OrderB
 	}
 	bookManager.OrderBooks[symbol] = orderBook
 	return orderBook
+}
+
+func (bookManager *OrderBookManager) GetOrderBook(symbol string) (*OrderBookResponse,error) {
+	orderBook, exists := bookManager.OrderBooks[symbol]
+	fmt.Println(orderBook.BuyOrders)
+	fmt.Println(orderBook.SellOrders)
+	buyOrders := orderBook.BuyOrders.Format()
+	sellOrders := orderBook.SellOrders.Format()
+	if(!exists){
+		return nil, errors.New("OrderBook for this symbol not found")
+	}
+	return &OrderBookResponse{
+		Symbol: symbol,
+		BuyOrders: buyOrders,
+		SellOrders: sellOrders,
+	},nil
+	
+}
+
+func (h *Heap) Format() []models.Order {
+	var orders []models.Order
+	for !h.IsEmpty()  {
+		orders = append(orders, *h.GetTopOrder())
+		h.RemoveTop()
+	}
+	return orders
 }
 
 func (bookManager *OrderBookManager) SyncWithDatabase() error {
