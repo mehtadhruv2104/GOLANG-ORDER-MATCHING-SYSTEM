@@ -9,9 +9,9 @@ import (
 
 
 
-func InitTradeEngineRoutes(apiRoutes *gin.RouterGroup) {
+func InitTradeEngineRoutes(apiRoutes *gin.RouterGroup, h *orderHandler.OrderHandler) {
 
-	apiRoutes.POST("/orders", orderHandler.PlaceOrder)
+	apiRoutes.POST("/orders", h.PlaceOrder)
 	apiRoutes.DELETE("/orders/:id", orderHandler.CancelOrder)
 	apiRoutes.GET("/orders/:id", orderHandler.GetOrderStatus)
 	apiRoutes.GET(("/orderbook"), orderHandler.GetOrderBook)

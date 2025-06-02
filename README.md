@@ -1,2 +1,39 @@
 # GOLANG-ORDER-MATCHING-SYSTEM
-It should implement buy and sell orders for entities such as stocks
+This application is matching engine that receives market and limit orders and tries 
+to find the best match for each order.
+I have implemented an in memory heap that always gives back the best match 
+
+How to set up the project
+
+-> Install Mysql using Docker
+
+docker run --name new-mysql -e MYSQL_ROOT_PASSWORD=your_password -p 3306:3306 -d mysql:latest
+
+-> Create a new database
+
+1. start mysql server
+docker exec -it new-mysql mysql -u root -p
+
+2. Run the following command in SQL server
+CREATE DATABASE newdb;
+
+-> Clone the Repo
+
+git clone https://github.com/mehtadhruv2104/GOLANG-ORDER-MATCHING-SYSTEM
+
+-> Update .env file with DBURL
+
+DB_URL= yourDBURL
+
+-> Run migrations to initilaize tables
+
+cd migrations
+goose mysql $(yourDBURL) up
+
+-> Initialize go dependencies
+
+go mod tidy
+
+-> Run the server
+
+go run main.go
