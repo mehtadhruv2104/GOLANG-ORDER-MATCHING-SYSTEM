@@ -40,3 +40,28 @@ go mod tidy
 -> Run the server
 
 go run main.go
+
+
+-> Sample Curl Request
+
+curl 'http://localhost:8080/api/orders' \
+    --header 'Content-Type: application/json' \
+    --data '{
+    "symbol": "AMZ",
+    "side": "sell",
+    "type": "limit",
+    "price": 8,
+    "quantity": 5,
+    "status": "open"
+  }'
+
+  curl 'http://localhost:8080/api/orders' \
+    --header 'Content-Type: application/json' \
+    --data '{
+    "symbol": "AMZ",
+    "side": "buy",
+    "type": "market",
+    "price": 15,
+    "quantity": 50,
+    "status": "open"
+  }'
