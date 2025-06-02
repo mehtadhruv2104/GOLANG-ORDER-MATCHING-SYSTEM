@@ -2,7 +2,6 @@ package pkg
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mehtadhruv2104/GOLANG-ORDER-MATCHING-SYSTEM/pkg/orders/handler"

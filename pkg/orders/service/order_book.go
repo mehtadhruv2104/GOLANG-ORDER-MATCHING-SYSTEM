@@ -104,7 +104,7 @@ func (book *OrderBook) MatchMarketOrder(order *models.Order) (*models.Order, *mo
 		if topOrder == nil {
 			return nil, order, 0, fmt.Errorf("no orders in sell order book")
 		}
-		if topOrder.Price > order.Price {
+		if order.Type == models.Limit && topOrder.Price > order.Price {
 			return nil, order, 0, fmt.Errorf("no orders matching in sell order book")
 		}	
 			
@@ -146,7 +146,7 @@ func (book *OrderBook) MatchMarketOrder(order *models.Order) (*models.Order, *mo
 		if topOrder == nil {
 			return nil,nil, 0, fmt.Errorf("no orders in buy order book")
 		}
-		if topOrder.Price < order.Price{
+		if order.Type == models.Limit && topOrder.Price < order.Price{
 			return nil, nil, 0, fmt.Errorf("no orders matching in buy order book")
 		}
 
