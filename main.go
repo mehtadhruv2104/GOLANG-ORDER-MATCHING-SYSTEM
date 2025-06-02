@@ -24,5 +24,4 @@ func main(){
 	router := pkg.StartEngine(dB)
 	router.Run(":8080")
 	fmt.Println("Server is running on port 8080")
-	
 }

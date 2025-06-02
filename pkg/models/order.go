@@ -8,8 +8,8 @@ type Order struct{
 	Side			OrderSide  		`json:"side"`
 	Type 			OrderType  		`json:"type"`
 	Price 			float64  		`json:"price"`
-	Quantity 		int64  			`json:"quantity"`
-	RemainingQty 	int64  			`json:"remaining_qty"`
+	Quantity 		float64  		`json:"quantity"`
+	RemainingQty 	float64			`json:"remaining_quantity"`
 	Status 			OrderStatus  	`json:"status"`
 	CreatedAt 		time.Time  		`json:"created_at"`
 	UpdatedAt 		time.Time  		`json:"updated_at"`

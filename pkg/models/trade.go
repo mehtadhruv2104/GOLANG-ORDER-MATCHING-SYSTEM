@@ -9,8 +9,8 @@ type Trade struct {
 	BuyOrderID  int64     `json:"buy_order_id"`
 	SellOrderID int64     `json:"sell_order_id"`
 	Price        float64   `json:"price"`
-	Quantity     int64     `json:"quantity"`
-	ExcecutedAt   time.Time `json:"executed_at"`
+	Quantity     float64     `json:"quantity"`
+	ExecutedAt   time.Time `json:"executed_at"`
 }
 
 
