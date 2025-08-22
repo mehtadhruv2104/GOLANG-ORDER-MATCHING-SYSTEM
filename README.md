@@ -2,6 +2,7 @@
 This application is matching engine that receives market and limit orders and tries 
 to find the best match for each order.
 I have implemented an in memory heap that always gives back the best match 
+It is one of the most efficient solution.
 
 How to set up the project
 
